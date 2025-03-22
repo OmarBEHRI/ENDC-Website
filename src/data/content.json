@@ -1,0 +1,178 @@
+{
+  "hero": {
+    "title": "NeuroDynamics",
+    "slogan": "Where Brains And Machines Converge"
+  },
+  "history": {
+    "title": "Our History",
+    "description": "Ensias NeuroDynamics Club is the result of the fusion of two prominent Ensias Clubs which are: Ensias AI Club and Ensias Robotics Club",
+    "aiClubLogo": "../assets/AI Logo.png",
+    "roboticsClubLogo": "../assets/robotics logo.png"
+  },
+  "cells": {
+    "title": "Our Cells",
+    "description": "The NeuroDynamics club is organized into specialized cells, each focusing on different aspects of AI and robotics.",
+    "technical": [
+      {
+        "name": "AI Cell",
+        "description": "Organizes and delivers workshops and training sessions on artificial intelligence and machine learning.",
+        "icon": "../assets/AI-Cell.png"
+      },
+      {
+        "name": "Data Cell",
+        "description": "Conducts workshops and training sessions focused on data-oriented roles and methodologies.",
+        "icon": "../assets/DataCell.png"
+      },
+      {
+        "name": "Robotics Cell",
+        "description": "Hosts workshops and training sessions dedicated to robotics.",
+        "icon": "../assets/Robotic-Cell.png"
+      },
+      {
+        "name": "Projects Cell",
+        "description": "Develops projects that integrate both artificial intelligence and robotics.",
+        "icon": "../assets/Project Cell.png"
+      }
+    ],
+    "nonTechnical": [
+      {
+        "name": "Media Cell",
+        "description": "Responsible for documenting and promoting all club events, including filming, editing, and enhancing the club's public image and reach.",
+        "icon": "../assets/Media-Cell.png"
+      },
+      {
+        "name": "Sponsorship Cell",
+        "description": "Focuses on securing partnerships and sponsorships to support the club's initiatives and events.",
+        "icon": "../assets/Sponsoring-Cell.png"
+      },
+      {
+        "name": "Events Cell",
+        "description": "Oversees event planning and execution, managing logistics, coordinating with guest speakers, and facilitating competitions.",
+        "icon": "../assets/Event-Cell.png"
+      },
+      {
+        "name": "Design Cell",
+        "description": "Handles the visual identity of the club by creating banners, logos, promotional materials, and other design elements, ensuring artistic direction for events.",
+        "icon": "../assets/Design-Cell.png"
+      }
+    ]
+  },
+  "activities": {
+    "title": "Our Activities",
+    "subtitle": "Learn, Build, Innovate!",
+    "description": "At NeuroDynamics Club, we thrive on hands-on learning, collaboration, and real-world impact! Our activities are designed to push the boundaries of AI and robotics while fostering creativity and teamwork.",
+    "categories": [
+      {
+        "title": "External Events",
+        "description": "We proudly represent our club in major tech and science gatherings, including the Rabat Science Festival, where we showcase our innovations to a wider audience.",
+        "image": "../assets/team-festival-des-sciences.png"
+      },
+      {
+        "title": "Internal Activities",
+        "description": "From training sessions and workshops to collaborative projects, we provide the perfect space to experiment, build, and grow. Whether you're learning new frameworks or developing cutting-edge robotic solutions, there's always something exciting happening!",
+        "image": "../assets/workshops.png"
+      }
+    ]
+  },
+  "training": {
+    "title": "Explore Our Training Sessions",
+    "description": "Dive into our specialized training programs designed to equip you with cutting-edge skills in AI, Data Science, and Robotics.",
+    "categories": [
+      {
+        "name": "AI",
+        "sessions": [
+          {
+            "title": "Introduction to Machine Learning",
+            "description": "Learn the fundamentals of machine learning algorithms and applications.",
+            "duration": "8 weeks",
+            "level": "Beginner"
+          },
+          {
+            "title": "Deep Learning with PyTorch",
+            "description": "Build neural networks and implement deep learning models using PyTorch.",
+            "duration": "10 weeks",
+            "level": "Intermediate"
+          },
+          {
+            "title": "Natural Language Processing",
+            "description": "Explore techniques for processing and analyzing human language data.",
+            "duration": "6 weeks",
+            "level": "Advanced"
+          }
+        ]
+      },
+      {
+        "name": "Data",
+        "sessions": [
+          {
+            "title": "Data Analysis with Python",
+            "description": "Master data manipulation, visualization, and analysis using Python libraries.",
+            "duration": "6 weeks",
+            "level": "Beginner"
+          },
+          {
+            "title": "Big Data Processing",
+            "description": "Learn to process and analyze large datasets using distributed computing frameworks.",
+            "duration": "8 weeks",
+            "level": "Intermediate"
+          },
+          {
+            "title": "Data Engineering Pipeline",
+            "description": "Build robust data pipelines for collecting, processing, and storing data.",
+            "duration": "7 weeks",
+            "level": "Advanced"
+          }
+        ]
+      },
+      {
+        "name": "Robotics",
+        "sessions": [
+          {
+            "title": "Introduction to Robotics",
+            "description": "Understand the basics of robotics, sensors, and actuators.",
+            "duration": "8 weeks",
+            "level": "Beginner"
+          },
+          {
+            "title": "Robot Programming with ROS",
+            "description": "Program robots using the Robot Operating System (ROS) framework.",
+            "duration": "10 weeks",
+            "level": "Intermediate"
+          },
+          {
+            "title": "Autonomous Navigation",
+            "description": "Implement algorithms for robot localization, mapping, and path planning.",
+            "duration": "9 weeks",
+            "level": "Advanced"
+          }
+        ]
+      }
+    ]
+  },
+  "mainEvent": {
+    "title": "MARC Hackathon 2025",
+    "subtitle": "Innovate for Impact!",
+    "description": "Are you ready to push the boundaries of AI and robotics? Join MARC Hackathon 2025, where innovators come together to build AI-driven robotic solutions that enhance accessibility and empower individuals with disabilities!",
+    "theme": "AI and Robots in Human's Service",
+    "highlights": [
+      "Compete, Innovate, and Win!",
+      "10 Selected Teams",
+      "Hands-On Workshops",
+      "Exciting Prizes"
+    ],
+    "tagline": "Build the future. Make a difference.",
+    "ctaText": "Join the Challenge",
+    "logo": "../assets/MARC-Logo.png"
+  },
+  "navigation": {
+    "links": [
+      { "name": "Home", "path": "/" },
+      { "name": "History", "path": "/#history" },
+      { "name": "Cells", "path": "/#cells" },
+      { "name": "Main Event", "path": "/#main-event" },
+      { "name": "Training", "path": "/#training" },
+      { "name": "Activities", "path": "/#activities" }
+    ],
+    "logo": "../assets/ENDC LOGO GREY.png"
+  }
+}
