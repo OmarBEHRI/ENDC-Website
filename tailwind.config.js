@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      maxWidth: {
+        '7xl': '80rem',
+      },
       fontFamily: {
         audiowide: ['Audiowide', 'cursive'],
       },
@@ -18,6 +21,13 @@ export default {
         },
         background: '#ebebeb',
       },
+    },
+    screens: {
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
     },
   },
   plugins: [],

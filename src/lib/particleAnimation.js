@@ -273,7 +273,7 @@ export const initAnimation = (canvas) => {
       cancelAnimationFrame(animationFrameId);
     }
     cleanup();
-    window.removeEventListener('resize', handleResize);
+    // window.removeEventListener('resize', handleResize);
   };
 }
 

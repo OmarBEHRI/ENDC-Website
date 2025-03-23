@@ -17,6 +17,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@layer base {
+  html, body {
+    @apply overflow-x-hidden;
+    @apply w-full;
+  }
+}
+
 body {
   margin: 0;
   min-width: 320px;

@@ -74,11 +74,11 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative h-screen flex items-center justify-center">
+    <section className="relative h-[100svh] w-full flex items-center justify-center overflow-hidden">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
-      <div className="relative z-10 text-center w-full px-4 sm:px-6 flex flex-col items-center justify-center">
+      <div className="relative z-10 text-center w-full px-4 sm:px-6 max-w-5xl mx-auto">
         <motion.h1 
-          className="text-5xl sm:text-6xl md:text-8xl font-audiowide mb-6 w-full"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-audiowide mb-4 sm:mb-6"
           style={{ color: 'rgba(32, 32, 32, 0.8)' }}
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -87,7 +87,7 @@ const HeroSection = () => {
           {content.hero.title}
         </motion.h1>
         <motion.p 
-          className="text-lg sm:text-xl md:text-2xl font-audiowide w-full"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl font-audiowide"
           style={{ color: 'rgba(32, 32, 32, 1)' }}
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -99,77 +99,89 @@ const HeroSection = () => {
     </section>
   );
 };
+
+const SectionContainer = ({ children, className = "" }) => (
+  <div className={`container mx-auto px-4 sm:px-6 md:px-8 max-w-5xl ${className}`}>
+    {children}
+  </div>
+);
+
 const HistorySection = () => {
   return (
-    <section id="history" className="py-20 bg-white w-full px-6 sm:px-12 md:px-16 lg:px-24">
-      <div className="container mx-auto max-w-full">
-        <motion.h2 
-          className="text-3xl md:text-4xl font-audiowide text-primary-blue text-center mb-12"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          {content.history.title}
-        </motion.h2>
-        
-        <div className="max-w-3xl mx-auto text-center mb-12">
-          <AnimatedText 
-            text={content.history.description}
-            className="text-lg leading-relaxed block"
-          />
-        </div>
-        
-        <div className="flex flex-col md:flex-row items-center justify-center gap-12">
-          <motion.div 
-            className="flex flex-col items-center"
-            initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <img 
-              src={aiClubLogo} 
-              alt="AI Club Logo" 
-              className="h-32 w-auto mb-4"
+    <section id="history" className="py-20 bg-white w-screen">
+  <SectionContainer>
+    <motion.h2 
+      className="text-3xl md:text-4xl font-audiowide text-primary-blue text-center mb-12"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      {content.history.title}
+    </motion.h2>
+
+    {/* Centered Description */}
+    <div className="max-w-4xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 text-center mb-12 px-4">
+          {content.history.description.split('. ').map((sentence, index) => (
+            <AnimatedText 
+              key={index}
+              text={sentence + '.'}
+              className="text-lg leading-relaxed block"
             />
-            <h3 className="text-xl font-audiowide text-primary-blue">Ensias AI Club</h3>
-          </motion.div>
-          
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="text-4xl font-bold text-primary-red"
-          >
-            +
-          </motion.div>
-          
-          <motion.div 
-            className="flex flex-col items-center"
-            initial={{ x: 100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <img 
-              src={roboticsClubLogo} 
-              alt="Robotics Club Logo" 
-              className="h-32 w-auto mb-4"
-            />
-            <h3 className="text-xl font-audiowide text-primary-blue">Ensias Robotics Club</h3>
-          </motion.div>
+          ))}
         </div>
-      </div>
-    </section>
+
+    {/* Clubs Section - Ensuring Full Width */}
+    <div className="flex flex-col md:flex-row items-center justify-center gap-12 w-full">
+      <motion.div 
+        className="flex flex-col items-center"
+        initial={{ x: -100, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <img 
+          src={aiClubLogo} 
+          alt="AI Club Logo" 
+          className="h-32 w-auto mb-4"
+        />
+        <h3 className="text-xl font-audiowide text-primary-blue">Ensias AI Club</h3>
+      </motion.div>
+
+      <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4 }}
+        className="text-4xl font-bold text-primary-red"
+      >
+        +
+      </motion.div>
+
+      <motion.div 
+        className="flex flex-col items-center"
+        initial={{ x: 100, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <img 
+          src={roboticsClubLogo} 
+          alt="Robotics Club Logo" 
+          className="h-32 w-auto mb-4"
+        />
+        <h3 className="text-xl font-audiowide text-primary-blue">Ensias Robotics Club</h3>
+      </motion.div>
+    </div>
+  </SectionContainer>
+</section>
   );
 };
 
 const CellsSection = () => {
   return (
-    <section id="cells" className="py-20 px-4 sm:px-6 md:px-8 lg:px-12 bg-background">
-      <div className="container mx-auto">
+    <section id="cells" className="py-20 bg-background w-full">
+      <SectionContainer>
         <motion.h2 
           className="text-3xl md:text-4xl font-audiowide text-primary-blue text-center mb-12"
           initial={{ opacity: 0 }}
@@ -189,7 +201,7 @@ const CellsSection = () => {
         
         <div className="mb-16">
           <h3 className="text-2xl font-audiowide text-primary-red text-center mb-8">Technical Cells</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {content.cells.technical.map((cell, index) => (
               <motion.div 
                 key={index}
@@ -220,7 +232,7 @@ const CellsSection = () => {
         
         <div>
           <h3 className="text-2xl font-audiowide text-primary-red text-center mb-8">Non-Technical Cells</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {content.cells.nonTechnical.map((cell, index) => (
               <motion.div 
                 key={index}
@@ -248,7 +260,7 @@ const CellsSection = () => {
             ))}
           </div>
         </div>
-      </div>
+      </SectionContainer>
     </section>
   );
 };
@@ -291,8 +303,8 @@ const TrainingSection = () => {
   ];
 
   return (
-    <section id="training" className="py-20 px-4 sm:px-6 md:px-8 lg:px-12 bg-background relative">
-      <div className="container mx-auto">
+    <section id="training" className="py-20 bg-background relative w-full">
+      <SectionContainer>
         <motion.h2 
           className="text-3xl md:text-4xl font-audiowide text-primary-blue text-center mb-16"
           initial={{ opacity: 0 }}
@@ -303,7 +315,7 @@ const TrainingSection = () => {
           Explore Our Training Sessions
         </motion.h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
           {trainingSessions.map((session, sessionIndex) => (
             <motion.div
               key={sessionIndex}
@@ -361,27 +373,57 @@ const TrainingSection = () => {
             Learn More About Our Training Sessions
           </motion.a>
         </div>
-      </div>
+      </SectionContainer>
     </section>
   );
 };
 
 const MainEventSection = () => {
   return (
-    <section id="main-event" className="py-20 bg-white relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
+    <section className="py-12 sm:py-16 md:py-20 bg-white relative overflow-hidden w-full">
+      {/* Background animation */}
+      <div className="absolute inset-0 opacity-5">
         <motion.div
-          className="absolute inset-0 bg-[url('../assets/MARC-Logo.png')] bg-center bg-no-repeat bg-contain"
+          className="absolute inset-0 bg-[url('../assets/MARC-LOGO-SVG.svg')] bg-center bg-no-repeat bg-contain"
           animate={{ rotate: 360 }}
-          transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
         />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12">
-          <div className="md:w-1/2">
+      <SectionContainer>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
+          {/* Logo */}
+          <motion.div
+            className="w-full md:w-1/2 flex justify-center order-2 md:order-1"
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <LazyImage
+              src={marcLogo}
+              alt="MARC Hackathon Logo"
+              className="w-56 sm:w-64 md:w-80 lg:w-96 h-auto transition-all duration-300 hover:scale-105 filter drop-shadow-xl"
+            />
+          </motion.div>
+
+          {/* Content */}
+          <div className="w-full md:w-1/2 order-1 md:order-2 space-y-6">
+            <motion.div
+              className="prose prose-lg max-w-full"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <AnimatedText
+                text={content.mainEvent.description}
+                className="text-base sm:text-lg leading-relaxed text-center md:text-left"
+              />
+            </motion.div>
+
             <motion.h2
-              className="text-4xl md:text-5xl font-audiowide text-primary-blue mb-6 text-center md:text-left"
+              className="text-3xl sm:text-4xl md:text-5xl font-audiowide text-primary-blue text-center md:text-left"
               initial={{ y: -50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -390,38 +432,10 @@ const MainEventSection = () => {
               {content.mainEvent.title}
             </motion.h2>
 
-            <motion.div
-              className="prose prose-lg mb-8 max-w-full"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <AnimatedText
-                text={content.mainEvent.description}
-                className="text-lg leading-relaxed block text-center md:text-left"
-              />
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              {content.mainEvent.highlights.map((highlight, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-background rounded-lg p-4 text-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <span className="text-sm font-audiowide text-primary-blue">{highlight}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="text-center md:text-left">
+            <div className="flex justify-center md:justify-start">
               <motion.a
                 href="/event"
-                className="inline-block bg-primary-red hover:bg-primary-orange text-white font-audiowide py-3 px-8 rounded-md transition-all transform hover:scale-105 hover:shadow-lg"
+                className="inline-block bg-primary-red hover:bg-primary-orange text-white font-audiowide py-3 px-6 sm:px-8 rounded-md transition-all transform hover:scale-105 hover:shadow-lg text-sm sm:text-base"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -432,31 +446,34 @@ const MainEventSection = () => {
                 Join the Challenge
               </motion.a>
             </div>
-          </div>
 
-          <motion.div
-            className="md:w-1/2 flex justify-center"
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <LazyImage
-              src={marcLogo}
-              alt="MARC Hackathon Logo"
-              className="w-64 md:w-96 h-auto transition-transform duration-300 hover:scale-105"
-            />
-          </motion.div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {content.mainEvent.highlights.map((highlight, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-background rounded-lg p-4 text-center shadow-md hover:shadow-lg transition-shadow"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <span className="text-sm sm:text-base font-audiowide text-primary-blue">
+                    {highlight}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      </SectionContainer>
     </section>
   );
 };
 
 const ActivitiesSection = () => {
   return (
-    <section id="activities" className="py-20 bg-white">
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+    <section id="activities" className="py-20 w-full">
+      <SectionContainer>
         <motion.h2 
           className="text-3xl md:text-4xl font-audiowide text-primary-blue text-center mb-4"
           initial={{ opacity: 0 }}
@@ -484,7 +501,7 @@ const ActivitiesSection = () => {
           />
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {content.activities.categories.map((category, index) => (
             <motion.div 
               key={index}
@@ -512,14 +529,14 @@ const ActivitiesSection = () => {
             </motion.div>
           ))}
         </div>
-      </div>
+      </SectionContainer>
     </section>
   );
 };
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="min-h-screen bg-background w-full overflow-x-hidden">
       <HeroSection />
       <HistorySection />
       <CellsSection />

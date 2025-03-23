@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import content from '../data/content.json';
+import marcLogo from '../assets/MARC-Logo.png';
 
 // Animation variants
 const textVariants = {
@@ -38,7 +39,7 @@ const EventPage = () => {
       {/* Hero Section */}
       <section className="relative py-20 md:py-32 bg-primary-blue text-white overflow-hidden">
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0 bg-[url('/assets/MARC-Logo.png')] bg-center bg-no-repeat bg-contain opacity-10"></div>
+          <div className="absolute inset-0 bg-[url('../assets/MARC-Logo.png')] bg-center bg-no-repeat bg-contain opacity-10"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -74,7 +75,7 @@ const EventPage = () => {
                 />
               </motion.div>
               
-              <motion.button
+              <a href="https://forms.gle/QeqH5UiHMi1keTnV8" target='_blank'><motion.button
                 className="bg-primary-red hover:bg-primary-orange text-white font-audiowide py-3 px-8 rounded-md transition-all transform hover:scale-105"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -83,7 +84,7 @@ const EventPage = () => {
                 whileTap={{ scale: 0.95 }}
               >
                 {content.mainEvent.ctaText}
-              </motion.button>
+              </motion.button></a>
             </div>
             
             <motion.div 
@@ -93,7 +94,7 @@ const EventPage = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <img 
-                src={content.mainEvent.logo} 
+                src={marcLogo} 
                 alt="MARC Logo" 
                 className="w-64 md:w-80 h-auto"
               />
@@ -103,7 +104,7 @@ const EventPage = () => {
       </section>
       
       {/* Theme Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <motion.div 
             className="text-center mb-16"
@@ -136,7 +137,7 @@ const EventPage = () => {
       </section>
       
       {/* Call to Action */}
-      <section className="py-20 bg-primary-blue text-white">
+      {/* <section className="py-20 bg-primary-blue text-white">
         <div className="container mx-auto px-4 text-center">
           <motion.h2 
             className="text-3xl md:text-4xl font-audiowide mb-8"
@@ -170,7 +171,7 @@ const EventPage = () => {
             {content.mainEvent.ctaText}
           </motion.button>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
