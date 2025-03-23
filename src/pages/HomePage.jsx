@@ -30,7 +30,7 @@ import LazyImage from '../components/ui/LazyImage';
 // Animation variants
 const textVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.08 } }
+  visible: { opacity: 1, transition: { staggerChildren: 0.03 } }
 };
 
 const letterVariants = {
@@ -41,19 +41,19 @@ const letterVariants = {
 // Text animation component
 const AnimatedText = ({ text, className }) => {
   return (
-    <motion.span
-      className={className}
+    <motion.div
+      className={`inline-block ${className}`}
       variants={textVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
     >
       {text.split('').map((char, index) => (
-        <motion.span key={index} variants={letterVariants}>
+        <motion.span key={index} variants={letterVariants} className="inline-block">
           {char === ' ' ? '\u00A0' : char}
         </motion.span>
       ))}
-    </motion.span>
+    </motion.div>
   );
 };
 
@@ -121,15 +121,18 @@ const HistorySection = () => {
     </motion.h2>
 
     {/* Centered Description */}
-    <div className="max-w-4xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 text-center mb-12 px-4">
-          {content.history.description.split('. ').map((sentence, index) => (
+    <div className="max-w-4xl w-full mx-auto grid grid-cols-1 gap-6 mb-12 px-4">
+      <div className="flex flex-col items-center justify-center">
+        {content.history.description.split('. ').map((sentence, index) => (
+          <div key={index} className="text-center w-full">
             <AnimatedText 
-              key={index}
               text={sentence + '.'}
-              className="text-lg leading-relaxed block"
+              className="text-lg leading-relaxed"
             />
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
+    </div>
 
     {/* Clubs Section - Ensuring Full Width */}
     <div className="flex flex-col md:flex-row items-center justify-center gap-12 w-full">
@@ -140,11 +143,13 @@ const HistorySection = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <img 
-          src={aiClubLogo} 
-          alt="AI Club Logo" 
-          className="h-32 w-auto mb-4"
-        />
+        <div className="h-40"> {/* Container to maintain alignment */}
+          <img 
+            src={aiClubLogo} 
+            alt="AI Club Logo" 
+            className="h-40 w-auto mb-4" 
+          />
+        </div>
         <h3 className="text-xl font-audiowide text-primary-blue">Ensias AI Club</h3>
       </motion.div>
 
@@ -165,11 +170,13 @@ const HistorySection = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <img 
-          src={roboticsClubLogo} 
-          alt="Robotics Club Logo" 
-          className="h-32 w-auto mb-4"
-        />
+        <div className="h-40"> {/* Container to maintain alignment */}
+          <img 
+            src={roboticsClubLogo} 
+            alt="Robotics Club Logo" 
+            className="h-32 w-auto mb-4"
+          />
+        </div>
         <h3 className="text-xl font-audiowide text-primary-blue">Ensias Robotics Club</h3>
       </motion.div>
     </div>
@@ -192,11 +199,15 @@ const CellsSection = () => {
           {content.cells.title}
         </motion.h2>
         
-        <div className="max-w-3xl mx-auto text-center mb-12">
-          <AnimatedText 
-            text={content.cells.description}
-            className="text-lg leading-relaxed block"
-          />
+        <div className="max-w-3xl w-full mx-auto grid grid-cols-1 gap-6 mb-12">
+          <div className="flex flex-col items-center justify-center">
+            <div className="text-center w-full">
+              <AnimatedText 
+                text={content.cells.description}
+                className="text-lg leading-relaxed"
+              />
+            </div>
+          </div>
         </div>
         
         <div className="mb-16">
@@ -382,13 +393,6 @@ const MainEventSection = () => {
   return (
     <section className="py-12 sm:py-16 md:py-20 bg-white relative overflow-hidden w-full">
       {/* Background animation */}
-      <div className="absolute inset-0 opacity-5">
-        <motion.div
-          className="absolute inset-0 bg-[url('../assets/MARC-LOGO-SVG.svg')] bg-center bg-no-repeat bg-contain"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-        />
-      </div>
 
       <SectionContainer>
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
@@ -408,19 +412,15 @@ const MainEventSection = () => {
           </motion.div>
 
           {/* Content */}
-          <div className="w-full md:w-1/2 order-1 md:order-2 space-y-6">
-            <motion.div
-              className="prose prose-lg max-w-full"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <AnimatedText
-                text={content.mainEvent.description}
-                className="text-base sm:text-lg leading-relaxed text-center md:text-left"
-              />
-            </motion.div>
+            <div className="max-w-4xl w-full mx-auto grid grid-cols-1 gap-6">
+              <div className="flex flex-col items-center justify-center">
+                <div className="text-center w-full">
+                  <AnimatedText
+                    text={content.mainEvent.description}
+                    className="text-base sm:text-lg leading-relaxed"
+                  />
+                </div>
+              </div>
 
             <motion.h2
               className="text-3xl sm:text-4xl md:text-5xl font-audiowide text-primary-blue text-center md:text-left"
