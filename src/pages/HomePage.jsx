@@ -16,7 +16,6 @@ import eventCellIcon from '../assets/Event-Cell.png';
 // Import logos and other assets
 import aiClubLogo from '../assets/AI Logo.png';
 import roboticsClubLogo from '../assets/robotics logo.png';
-import ndcLogo from '../assets/ENDC LOGO GREY.png';
 import marcLogo from '../assets/MARC-Logo.png';
 
 // Import activity images
@@ -74,7 +73,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative h-[100svh] w-full flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative h-[100svh] w-full flex items-center justify-center overflow-hidden">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
       <div className="relative z-10 text-center w-full px-4 sm:px-6 max-w-5xl mx-auto">
         <motion.h1 
@@ -391,14 +390,34 @@ const TrainingSection = () => {
 
 const MainEventSection = () => {
   return (
-    <section className="py-12 sm:py-16 md:py-20 bg-white relative overflow-hidden w-full">
-      {/* Background animation */}
-
+    <section id="main-event" className="py-12 sm:py-16 md:py-20 bg-white relative overflow-hidden w-full">
       <SectionContainer>
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
-          {/* Logo */}
+        {/* Title at the top */}
+        <motion.h2
+          className="text-3xl sm:text-4xl md:text-5xl font-audiowide text-primary-blue text-center mb-8"
+          initial={{ y: -50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          {content.mainEvent.title}
+        </motion.h2>
+
+        {/* Description */}
+        <div className="w-full mb-12">
+          <div className="text-center w-full max-w-6xl mx-auto">
+            <AnimatedText
+              text={content.mainEvent.description}
+              className="text-base sm:text-lg leading-relaxed"
+            />
+          </div>
+        </div>
+
+        {/* Centered Content */}
+        <div className="flex flex-col items-center justify-center gap-8">
+          {/* Logo - Centered and Larger */}
           <motion.div
-            className="w-full md:w-1/2 flex justify-center order-2 md:order-1"
+            className="w-full flex justify-center"
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
@@ -407,62 +426,40 @@ const MainEventSection = () => {
             <LazyImage
               src={marcLogo}
               alt="MARC Hackathon Logo"
-              className="w-56 sm:w-64 md:w-80 lg:w-96 h-auto transition-all duration-300 hover:scale-105 filter drop-shadow-xl"
+              className="w-72 sm:w-96 md:w-[500px] lg:w-[600px] h-auto transition-all duration-300 hover:scale-105"
             />
           </motion.div>
 
-          {/* Content */}
-            <div className="max-w-4xl w-full mx-auto grid grid-cols-1 gap-6">
-              <div className="flex flex-col items-center justify-center">
-                <div className="text-center w-full">
-                  <AnimatedText
-                    text={content.mainEvent.description}
-                    className="text-base sm:text-lg leading-relaxed"
-                  />
-                </div>
-              </div>
+          {/* Call to Action - Centered */}
+          <motion.a
+            href="/event"
+            className="inline-block bg-primary-red hover:bg-primary-orange text-white font-audiowide py-4 px-8 rounded-md transition-all transform hover:scale-105 hover:shadow-lg text-lg"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            whileHover={{ y: -5 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Join the Challenge
+          </motion.a>
 
-            <motion.h2
-              className="text-3xl sm:text-4xl md:text-5xl font-audiowide text-primary-blue text-center md:text-left"
-              initial={{ y: -50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              {content.mainEvent.title}
-            </motion.h2>
-
-            <div className="flex justify-center md:justify-start">
-              <motion.a
-                href="/event"
-                className="inline-block bg-primary-red hover:bg-primary-orange text-white font-audiowide py-3 px-6 sm:px-8 rounded-md transition-all transform hover:scale-105 hover:shadow-lg text-sm sm:text-base"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
+          {/* Highlights Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8 w-full">
+            {content.mainEvent.highlights.map((highlight, index) => (
+              <motion.div
+                key={index}
+                className="bg-background rounded-lg p-4 text-center shadow-md hover:shadow-lg transition-shadow"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                whileHover={{ y: -5 }}
-                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                Join the Challenge
-              </motion.a>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {content.mainEvent.highlights.map((highlight, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-background rounded-lg p-4 text-center shadow-md hover:shadow-lg transition-shadow"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <span className="text-sm sm:text-base font-audiowide text-primary-blue">
-                    {highlight}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
+                <span className="text-sm sm:text-base font-audiowide text-primary-blue">
+                  {highlight}
+                </span>
+              </motion.div>
+            ))}
           </div>
         </div>
       </SectionContainer>

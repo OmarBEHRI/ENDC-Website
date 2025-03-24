@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import content from '../data/content.json';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+import HomeButton from "../components/ui/HomeButton";
 
 // Animation variants
 const textVariants = {
@@ -38,6 +39,7 @@ const TrainingPage = () => {
   
   return (
     <div className="min-h-screen bg-background py-20">
+      <HomeButton />
       <div className="container mx-auto px-4">
         <motion.h1 
           className="text-4xl md:text-5xl font-audiowide text-primary-blue text-center mb-4"

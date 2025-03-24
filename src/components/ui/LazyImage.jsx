@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 // LazyImage component for optimized image loading
-const LazyImage = ({ src, alt, className, placeholderColor = '#f0f0f0', ...props }) => {
+const LazyImage = ({ src, alt, className, placeholderColor = '#f0f0f00', ...props }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const imgRef = useRef(null);

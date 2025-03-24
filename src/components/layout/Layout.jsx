@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import content from '../../data/content.json';
 import logoGrey from '../../assets/ENDC LOGO GREY.png';
+import logoSub from '../../assets/endc-straight.png';  // Add this import
 
 const Layout = ({ children }) => {
   const [scrollDirection, setScrollDirection] = useState('none');
@@ -40,10 +41,13 @@ const Layout = ({ children }) => {
     };
   }, [lastScrollY]);
 
+  // Check if current route is training or event page
+  const isTrainingOrEventPage = location.pathname === '/training' || location.pathname === '/event';
+
   return (
     <div className="min-h-screen bg-background">
       <AnimatePresence>
-        {(scrollDirection === 'up' || scrollDirection === 'none' || lastScrollY < 100) && (
+        {!isTrainingOrEventPage && (scrollDirection === 'up' || scrollDirection === 'none' || lastScrollY < 100) && (
           <motion.nav 
             className="fixed top-0 left-0 w-full py-6 z-50 backdrop-blur-md bg-background/70 shadow-sm"
             initial={{ y: -100 }}
@@ -97,7 +101,7 @@ const Layout = ({ children }) => {
         )}
       </AnimatePresence>
       
-      <main className="pt-24 w-full">
+      <main className={`${!isTrainingOrEventPage ? 'pt-24' : 'pt-0'} w-full`}>
         {children}
       </main>
       
@@ -106,9 +110,9 @@ const Layout = ({ children }) => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <img 
-                src={logoGrey} 
+                src={logoSub} 
                 alt="NeuroDynamics Logo" 
-                className="h-16 w-auto"
+                className="px-6 h-16 w-auto opacity-100 transform"
               />
             </div>
             <div className="text-center md:text-right">

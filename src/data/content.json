@@ -166,11 +166,11 @@
   },
   "navigation": {
     "links": [
-      { "name": "Home", "path": "/" },
+      { "name": "Home", "path": "/#hero" },
       { "name": "History", "path": "/#history" },
       { "name": "Cells", "path": "/#cells" },
-      { "name": "Main Event", "path": "/#main-event" },
       { "name": "Training", "path": "/#training" },
+      { "name": "Main Event", "path": "/#main-event" },
       { "name": "Activities", "path": "/#activities" }
     ],
     "logo": "../assets/ENDC LOGO GREY.png"
