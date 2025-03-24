@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import content from '../data/content.json';
 import { initAnimation } from '../lib/particleAnimation';
@@ -185,6 +185,132 @@ const HistorySection = () => {
 };
 
 const CellsSection = () => {
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredSection, setHoveredSection] = useState(null);
+  
+  const renderCardCarousel = (cells, cellType) => {
+    return (
+      <div className="relative w-full h-[28rem] flex items-center justify-center overflow-hidden my-12">
+        {[...cells].reverse().map((cell, idx) => {
+          const index = cells.length - 1 - idx;
+          const isHovered = hoveredIndex === index && hoveredSection === cellType;
+          
+          // Calculate center offset
+          const centerOffset = (cells.length * 6 * 16) / 2;
+          
+          // Calculate position based on hover state
+          const xPos = 
+            hoveredSection === null ? `calc(${index * 6}rem - ${centerOffset}px + 50%)` : 
+            hoveredSection !== cellType ? `calc(${index * 6}rem - ${centerOffset}px + 50%)` :
+            index <= hoveredIndex 
+              ? `calc(${index * 6}rem - ${centerOffset}px + 50% - 6rem)` 
+              : `calc(${index * 6}rem - ${centerOffset}px + 50% + 12rem)`;
+
+          // Get the correct icon
+          const getIcon = () => {
+            if (cellType === 'technical') {
+              switch(cell.name) {
+                case "AI Cell": return aiCellIcon;
+                case "Data Cell": return dataCellIcon;
+                case "Robotics Cell": return roboticsCellIcon;
+                default: return projectCellIcon;
+              }
+            } else {
+              switch(cell.name) {
+                case "Media Cell": return mediaCellIcon;
+                case "Sponsorship Cell": return sponsorCellIcon;
+                case "Events Cell": return eventCellIcon;
+                default: return designCellIcon;
+              }
+            }
+          };
+
+          const icon = getIcon();
+
+          return (
+            <motion.div
+              key={index}
+              className="absolute top-0 bottom-0 bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
+              style={{
+                width: isHovered ? '24rem' : '12rem', 
+                height: '100%',
+                zIndex: index,
+                originX: 0
+              }}
+              animate={{
+                left: xPos,
+                boxShadow: isHovered 
+                  ? '0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)'
+                  : '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+              }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              onHoverStart={() => {
+                setHoveredIndex(index);
+                setHoveredSection(cellType);
+              }}
+              onHoverEnd={() => {
+                setHoveredIndex(null);
+                setHoveredSection(null);
+              }}
+            >
+              {/* Background image (always visible with opacity) */}
+              <div className="absolute inset-0">
+                <img 
+                  src={icon}
+                  alt={cell.name}
+                  className="w-full h-full object-cover opacity-20"
+                />
+              </div>
+
+              {/* Vertical title (visible when not hovered) */}
+              <motion.div 
+                className="absolute left-4 top-0 bottom-0 flex items-center origin-left"
+                animate={{ 
+                  opacity: isHovered ? 0 : 1,
+                  rotateZ: -90
+                }}
+                transition={{ duration: 0.2 }}
+              >
+                <h4 className="text-xl font-audiowide text-primary-blue whitespace-nowrap">
+                  {cell.name}
+                </h4>
+              </motion.div>
+              
+              {/* Expanded card content (visible when hovered) */}
+              <motion.div 
+                className="absolute inset-0 flex overflow-hidden"
+                animate={{ 
+                  opacity: isHovered ? 1 : 0
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Left side image */}
+                <div className="w-3/5 relative">
+                  <img 
+                    src={icon}
+                    alt={cell.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white opacity-50"></div>
+                </div>
+                
+                {/* Right side text content */}
+                <div className="w-2/5 p-6 flex flex-col justify-start pt-12">
+                  <h3 className="text-xl font-audiowide text-primary-blue mb-4">
+                    {cell.name}
+                  </h3>
+                  <p className="text-sm text-gray-700">
+                    {cell.description}
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+          );
+        })}
+      </div>
+    );
+  };
+
   return (
     <section id="cells" className="py-20 bg-background w-full">
       <SectionContainer>
@@ -211,64 +337,12 @@ const CellsSection = () => {
         
         <div className="mb-16">
           <h3 className="text-2xl font-audiowide text-primary-red text-center mb-8">Technical Cells</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-            {content.cells.technical.map((cell, index) => (
-              <motion.div 
-                key={index}
-                className="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center text-center"
-                initial={{ y: 50, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -10, transition: { duration: 0.2 } }}
-              >
-                {/* Cell content remains the same */}
-                <img 
-                  src={
-                    cell.name === "AI Cell" ? aiCellIcon :
-                    cell.name === "Data Cell" ? dataCellIcon :
-                    cell.name === "Robotics Cell" ? roboticsCellIcon :
-                    projectCellIcon
-                  } 
-                  alt={cell.name} 
-                  className="h-20 w-auto mb-4" 
-                />
-                <h4 className="text-xl font-audiowide text-primary-blue mb-2">{cell.name}</h4>
-                <p className="text-sm">{cell.description}</p>
-              </motion.div>
-            ))}
-          </div>
+          {renderCardCarousel(content.cells.technical, 'technical')}
         </div>
         
         <div>
           <h3 className="text-2xl font-audiowide text-primary-red text-center mb-8">Non-Technical Cells</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-            {content.cells.nonTechnical.map((cell, index) => (
-              <motion.div 
-                key={index}
-                className="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center text-center"
-                initial={{ y: 50, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -10, transition: { duration: 0.2 } }}
-              >
-                {/* Cell content remains the same */}
-                <img 
-                  src={
-                    cell.name === "Media Cell" ? mediaCellIcon :
-                    cell.name === "Sponsorship Cell" ? sponsorCellIcon :
-                    cell.name === "Events Cell" ? eventCellIcon:
-                    designCellIcon
-                  } 
-                  alt={cell.name} 
-                  className="h-20 w-auto mb-4" 
-                />
-                <h4 className="text-xl font-audiowide text-primary-blue mb-2">{cell.name}</h4>
-                <p className="text-sm">{cell.description}</p>
-              </motion.div>
-            ))}
-          </div>
+          {renderCardCarousel(content.cells.nonTechnical, 'nonTechnical')}
         </div>
       </SectionContainer>
     </section>
