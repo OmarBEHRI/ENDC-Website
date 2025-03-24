@@ -584,10 +584,11 @@ const ActivitiesSection = () => {
               whileHover={{ y: -10, transition: { duration: 0.2 } }}
             >
               <div className="relative overflow-hidden h-72">
-                <LazyImage 
+                <img 
                   src={index === 0 ? teamFestivalImage : workshopsImage} 
                   alt={category.title} 
-                  className="w-full h-full transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <span className="text-white font-audiowide text-xl">{category.title}</span>
