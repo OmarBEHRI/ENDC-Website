@@ -93,10 +93,23 @@ const TrainingPage = () => {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     whileHover={{ y: -10, transition: { duration: 0.2 } }}
                   >
+                    <div className="relative h-48 overflow-hidden">
+                      <img 
+                        src={session.image} 
+                        alt={session.title}
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                      />
+                    </div>
                     <div className="p-6">
                       <div className="flex justify-between items-start mb-4">
-                        <h3 className="text-xl font-audiowide text-primary-blue">{session.title}</h3>
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${session.level === 'Beginner' ? 'bg-green-100 text-green-800' : session.level === 'Intermediate' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}`}>
+                        <h3 className="text-xl font-audiowide text-primary-blue truncate pr-2">{session.title}</h3>
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium flex-shrink-0 ${
+                          session.level === 'Beginner' 
+                            ? 'bg-green-100 text-green-800' 
+                            : session.level === 'Intermediate' 
+                            ? 'bg-yellow-100 text-yellow-800' 
+                            : 'bg-red-100 text-red-800'
+                        }`}>
                           {session.level}
                         </span>
                       </div>
@@ -109,7 +122,7 @@ const TrainingPage = () => {
                       </div>
                       <button
                         className="mt-4 w-full flex items-center justify-center px-4 py-2 bg-primary-blue text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
-                        onClick={() => window.open(session.courseUrl, '_blank')}
+                        onClick={() => window.open(session.course, '_blank')}  // Changed from courseUrl to course
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

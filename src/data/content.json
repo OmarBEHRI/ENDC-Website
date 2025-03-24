@@ -82,22 +82,12 @@
         "name": "AI",
         "sessions": [
           {
-            "title": "Introduction to Machine Learning",
-            "description": "Learn the fundamentals of machine learning algorithms and applications.",
+            "image": "/courses_images/ts_ai_course.jpg",
+            "title": "Introduction to Time Series in AI: From Basics to Forecasting",
+            "description": "Analyze time series data, preprocess it, and build forecasting models for real-time cryptocurrency prediction.",
             "duration": "8 weeks",
-            "level": "Beginner"
-          },
-          {
-            "title": "Deep Learning with PyTorch",
-            "description": "Build neural networks and implement deep learning models using PyTorch.",
-            "duration": "10 weeks",
-            "level": "Intermediate"
-          },
-          {
-            "title": "Natural Language Processing",
-            "description": "Explore techniques for processing and analyzing human language data.",
-            "duration": "6 weeks",
-            "level": "Advanced"
+            "level": "Beginner",
+            "course": "/courses_pdf/ts.pdf"
           }
         ]
       },
@@ -105,22 +95,12 @@
         "name": "Data",
         "sessions": [
           {
-            "title": "Data Analysis with Python",
-            "description": "Master data manipulation, visualization, and analysis using Python libraries.",
+            "image": "/courses_images/classification_course.jpg",
+            "title": "ML Classification",
+            "description": "Unlock the secrets of ML classification and build powerful predictive models.",
             "duration": "6 weeks",
-            "level": "Beginner"
-          },
-          {
-            "title": "Big Data Processing",
-            "description": "Learn to process and analyze large datasets using distributed computing frameworks.",
-            "duration": "8 weeks",
-            "level": "Intermediate"
-          },
-          {
-            "title": "Data Engineering Pipeline",
-            "description": "Build robust data pipelines for collecting, processing, and storing data.",
-            "duration": "7 weeks",
-            "level": "Advanced"
+            "level": "Beginner",
+            "course": "/courses_pdf/classification.pdf"
           }
         ]
       },
@@ -128,22 +108,12 @@
         "name": "Robotics",
         "sessions": [
           {
+            "image": "/courses_images/robotics_course.jpg",
             "title": "Introduction to Robotics",
             "description": "Understand the basics of robotics, sensors, and actuators.",
             "duration": "8 weeks",
-            "level": "Beginner"
-          },
-          {
-            "title": "Robot Programming with ROS",
-            "description": "Program robots using the Robot Operating System (ROS) framework.",
-            "duration": "10 weeks",
-            "level": "Intermediate"
-          },
-          {
-            "title": "Autonomous Navigation",
-            "description": "Implement algorithms for robot localization, mapping, and path planning.",
-            "duration": "9 weeks",
-            "level": "Advanced"
+            "level": "Beginner",
+            "course": "/courses_pdf/robotics.pdf"
           }
         ]
       }
