@@ -8,6 +8,7 @@ import logoSub from '../../assets/endc-straight.png';  // Add this import
 const Layout = ({ children }) => {
   const [scrollDirection, setScrollDirection] = useState('none');
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);  // Add this state
   const location = useLocation();
 
   useEffect(() => {
@@ -43,6 +44,11 @@ const Layout = ({ children }) => {
 
   // Check if current route is training or event page
   const isTrainingOrEventPage = location.pathname === '/training' || location.pathname === '/event';
+
+  // Add this useEffect to close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -89,14 +95,48 @@ const Layout = ({ children }) => {
               </div>
               
               <div className="md:hidden">
-                {/* Mobile menu button - to be implemented */}
-                <button className="text-primary-blue hover:text-primary-red">
+                <button 
+                  className="text-primary-blue hover:text-primary-red"
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  aria-label="Toggle mobile menu"
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
                 </button>
               </div>
             </div>
+
+            {/* Add Mobile Menu */}
+            <AnimatePresence>
+              {isMobileMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full left-0 w-full bg-background/95 backdrop-blur-md shadow-lg py-4 md:hidden"
+                >
+                  <div className="flex flex-col space-y-4 px-4">
+                    {content.navigation.links.map((link, index) => (
+                      <Link 
+                        key={index}
+                        to={link.path}
+                        className={`text-primary-blue font-audiowide text-lg transition-all hover:text-primary-red ${
+                          location.pathname === link.path || 
+                          (link.path.includes('#') && location.hash === link.path.substring(link.path.indexOf('#'))) 
+                            ? 'text-primary-red' 
+                            : ''
+                        }`}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {link.name}
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.nav>
         )}
       </AnimatePresence>
