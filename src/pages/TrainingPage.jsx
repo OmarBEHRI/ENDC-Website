@@ -114,15 +114,9 @@ const TrainingPage = () => {
                         </span>
                       </div>
                       <p className="text-sm mb-4">{session.description}</p>
-                      <div className="flex items-center text-sm text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span>{session.duration}</span>
-                      </div>
                       <button
                         className="mt-4 w-full flex items-center justify-center px-4 py-2 bg-primary-blue text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
-                        onClick={() => window.open(session.course, '_blank')}  // Changed from courseUrl to course
+                        onClick={() => window.open(session.course, '_blank')}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
